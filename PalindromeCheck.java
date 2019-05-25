@@ -8,7 +8,8 @@ public class PalindromeCheck {
 		Scanner reader = new Scanner(System.in);
 		System.out.println("Enter a string:");
 		String str = reader.nextLine();
-		if(str.equals(reverse(str)))
+		
+		if(palinCheck(str))
 		{
 			System.out.println("String is Palindrome");
 		}
@@ -18,12 +19,15 @@ public class PalindromeCheck {
 		}
 		reader.close();
 	}
-	public static String reverse(String s)
+	public static Boolean palinCheck(String str)
 	{
-		String r = "";
-		for(int i=s.length()-1;i>=0;i--)
-			r = r+s.charAt(i);
-		return r;
+		int i,j;
+		for(i=0,j=str.length()-1;i<str.length()/2;i++,j--)
+		{
+			if(str.charAt(i) != str.charAt(j))
+				return false;
+		}
+		return true;
 	}
 
 }

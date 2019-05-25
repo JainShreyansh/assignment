@@ -1,9 +1,9 @@
 package test;
 
 public class Employee {
-	int workingHours;
-	double baseSal;
-	int vacationDays;
+	private int workingHours;
+	private double baseSal;
+	private int vacationDays;
 
 	Employee() {
 		this.workingHours = 40;

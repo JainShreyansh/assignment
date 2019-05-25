@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class SearchANumberInASortedArray {
 	public static void main(String[] args) throws IOException {
-		
+
 		Scanner reader = new Scanner(System.in);
 		System.out.println("Enter Array Length:");
 		int n = reader.nextInt();
@@ -16,22 +16,17 @@ public class SearchANumberInASortedArray {
 			a[i] = reader.nextInt();
 		System.out.println("Enter a number to search in array:");
 		int x = reader.nextInt();
-		if(isSorted(a))
-		{
-			if(isPresent(a, x))
-			{
-				System.out.println("Number "+x+" is present in the list.");
+		int index = -1;
+		if (isSorted(a)) {
+			if ((index = isPresent(a, x, 0, a.length-1))>=0) {
+				System.out.println("Number " + x + " is present in the list at index: "+ (index + 1));
+			} else {
+				System.out.println("Number " + x + " is not present in the list.");
 			}
-			else
-			{
-				System.out.println("Number "+x+" is not present in the list.");
-			}
-		}
-		else
-		{
+		} else {
 			System.out.println("Array is not sorted!");
 		}
-			reader.close();
+		reader.close();
 	}
 
 	public static boolean isSorted(int[] a) {
@@ -42,11 +37,19 @@ public class SearchANumberInASortedArray {
 		return true;
 	}
 
-	public static boolean isPresent(int[] a, int x) {
-		for (int i = 0; i < a.length; i++) {
-			if (x == a[i])
-				return true;
+	public static int isPresent(int[] a, int x, int st, int end) {
+		int mid = st + (end - st) / 2;
+		if (a[mid] == x) {
+			return mid;
 		}
-		return false;
+		if(x<a[mid])
+		{
+			return isPresent(a,x,st,mid-1);
+		}
+		else if(x>a[mid])
+		{
+			return isPresent(a, x, mid+1, end);
+		}
+		return -1;
 	}
 }

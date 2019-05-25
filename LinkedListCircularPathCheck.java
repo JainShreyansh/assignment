@@ -18,15 +18,23 @@ public class LinkedListCircularPathCheck {
 	/* Function to check circular path in linked list */
 	boolean checkCircularPath() {
 		Node slow_ptr = head;
-		Node fast_ptr = head.next;
+		Node fast_ptr = null;
 		if (head != null) {
 			while (slow_ptr != null) {
 				fast_ptr = slow_ptr.next;
+				int count = 0;
 				while (fast_ptr != null) {
-					if (slow_ptr.data == fast_ptr.data) {
+					if ((fast_ptr.data - slow_ptr.data) == (count+1)) {
+						fast_ptr = fast_ptr.next;
+						count++;
+					} else if (count > 0 && (slow_ptr.data == fast_ptr.data)) {
+						System.out.println("Path Exists from: "+slow_ptr.data+" to: "+fast_ptr.data+" and length is: "+(count+2));
 						return true;
+						
 					}
-					fast_ptr = fast_ptr.next;
+					else {
+						break;
+					}
 				}
 				slow_ptr = slow_ptr.next;
 			}
