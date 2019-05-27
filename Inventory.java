@@ -123,11 +123,11 @@ public class Inventory implements Serializable {
 		}
 	}
 
-	public void remove(String i) throws IOException {
+	public static void remove(String i) throws IOException {
 		List<Inventory> list = readInventory();
 		if (!list.isEmpty()) {
 			for (Inventory inv : list) {
-				if (inv.getItem().equals(item))
+				if (inv.getItem().equals(i))
 					list.remove(inv);
 			}
 			updateInventoryAfterDelete(list);
@@ -136,7 +136,7 @@ public class Inventory implements Serializable {
 		}
 	}
 
-	public void remove(String item, double price) throws IOException {
+	public static void remove(String item, double price) throws IOException {
 		List<Inventory> list = readInventory();
 		if (!list.isEmpty()) {
 			for (Inventory inv : list) {
@@ -149,7 +149,7 @@ public class Inventory implements Serializable {
 		}
 	}
 
-	private void updateInventoryAfterDelete(List<Inventory> list) {
+	private static void updateInventoryAfterDelete(List<Inventory> list) {
 		try {
 			FileOutputStream fos = new FileOutputStream(new File("C:\\workspace\\test\\src\\\\test\\tempInventory.txt"));
 			ObjectOutputStream o = new ObjectOutputStream(fos);
